@@ -1,6 +1,6 @@
 <?php
 
-namespace Codeforges\SpotRadar\SpotServerBundle\DependencyInjection;
+namespace Codeforges\SpotRadar\SpotApiBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class SpotServerExtension extends Extension
+class SpotApiExtension extends Extension
 {
     /**
      * {@inheritdoc}

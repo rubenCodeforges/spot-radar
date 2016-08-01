@@ -1,0 +1,14 @@
+spot_api_homepage:
+    path:     /
+    defaults: { _controller: SpotApiBundle:Default:index }
+
+#spot_marker_get:
+#    path: /marker/{id}
+#
+#    requirments:
+#        _method: GET
+#
+#spot_marker_all:
+#    path: /markers
+#    requirments:
+#        _method: GET

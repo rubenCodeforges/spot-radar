@@ -1,3 +1,0 @@
-spot_server_homepage:
-    path:     /
-    defaults: { _controller: SpotServerBundle:Default:index }

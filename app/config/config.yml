@@ -55,9 +55,21 @@ doctrine:
 doctrine_mongodb:
     connections:
         default:
-            server: "%mongodb_server%"
+            server: mongodb://localhost:27017
             options: {}
     default_database: SPOT_RADAR
     document_managers:
-        default:
-            auto_mapping: true
+       default:
+          auto_mapping: true
+          mappings:
+              SpotApiBundle:
+                  type: annotation
+                  dir: Models/
+                  prefix: 'Codeforges\SpotRadar\SpotApiBundle\'
+                  is_bundle: true
+
+#            filters:
+#                filter-name:
+#                    class: Class\Example\Filter\ODM\ExampleFilter
+#                    enabled: true
+#            metadata_cache_driver: array # array, apc, xcache, memcache
