@@ -1,6 +1,6 @@
 <?php
 
-namespace Codeforges\SpotRadar\SpotServerBundle\Tests\Controller;
+namespace Codeforges\SpotRadar\SpotApiBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
