@@ -68,8 +68,6 @@ doctrine_mongodb:
                   prefix: 'Codeforges\SpotRadar\SpotApiBundle\'
                   is_bundle: true
 
-#            filters:
-#                filter-name:
-#                    class: Class\Example\Filter\ODM\ExampleFilter
-#                    enabled: true
-#            metadata_cache_driver: array # array, apc, xcache, memcache
+fos_rest:
+    routing_loader:
+        default_format: json
