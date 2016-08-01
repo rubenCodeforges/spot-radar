@@ -1,4 +1,6 @@
-spot-radar-serve
+spot-radar-api
 ================
 
-A Symfony project created on July 31, 2016, 7:43 pm.
+# **Description**
+
+The Idea behind this project is to create a system-framework for report lost-found items. 
