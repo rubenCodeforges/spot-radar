@@ -69,5 +69,7 @@ doctrine_mongodb:
                   is_bundle: true
 
 fos_rest:
+    view:
+        view_response_listener: force
     routing_loader:
         default_format: json
