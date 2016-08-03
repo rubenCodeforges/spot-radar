@@ -12,6 +12,7 @@ class Marker
 {
     /**
      * @MongoDB\Id
+     * @Expose
      */
     protected $id;
 
