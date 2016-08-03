@@ -4,24 +4,26 @@ namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 
 
 use Codeforges\SpotRadar\SpotApiBundle\Models\Marker;
+use Codeforges\SpotRadar\SpotApiBundle\SpotApiBundle;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Request\RequestBodyParamConverter;
+use Symfony\Component\HttpFoundation\Request;
 
 
-class MarkerController extends FOSRestController
+class MarkerController extends SpotRestController
 {
     public function getMarkersAction() {
-        $dm = $this->get('doctrine_mongodb')->getRepository('Codeforges\SpotRadar\SpotApiBundle\Models\Marker');
-        return $dm->findAll();
+        return  $this->getBundleRepository('\Marker')->findAll();
     }
     
     public function getMarkerAction($id) {
-        
+        return $this->getBundleRepository('\Marker')->find($id);
     }
 
-    public function putMarkerAction() {
+    public function putMarkerAction($type, Request $request) {
         $marker = new Marker();
-        $marker->setType("PET");
-        $marker->setDescription("First marker description");
+        $marker->setType($type);
+        $marker->setDescription($request);
         $marker->setLocation(array(
             "lat"=> 1.3,
             "lng"=> 1.2
@@ -31,4 +33,5 @@ class MarkerController extends FOSRestController
         $dm->persist($marker);
         $dm->flush();
     }
+
 }
