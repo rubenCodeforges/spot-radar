@@ -14,4 +14,5 @@ class Client extends BaseClient
      * @MongoDB\Id(strategy="auto")
      */
     protected $id;
+    
 }
