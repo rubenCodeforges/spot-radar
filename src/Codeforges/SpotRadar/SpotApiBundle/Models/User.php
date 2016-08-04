@@ -18,27 +18,10 @@ class User extends BaseUser
     /**
      * @MongoDB\Field(type="string")
      */
-    protected $name;
+    protected $username;
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return $this
+     * @MongoDB\Field(type="string")
      */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string $name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+    protected $email;
 }
