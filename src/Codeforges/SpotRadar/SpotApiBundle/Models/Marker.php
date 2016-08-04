@@ -91,7 +91,7 @@ class Marker
     /**
      * Set location
      *
-     * @param array $location
+     * @param hash $location
      * @return $this
      */
     public function setLocation($location)

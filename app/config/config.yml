@@ -50,7 +50,7 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        auto_mapping: false
 
 doctrine_mongodb:
     connections:
@@ -60,7 +60,7 @@ doctrine_mongodb:
     default_database: SPOT_RADAR
     document_managers:
        default:
-          auto_mapping: true
+          auto_mapping: false
           mappings:
               SpotApiBundle:
                   type: annotation
@@ -73,3 +73,18 @@ fos_rest:
         view_response_listener: force
     routing_loader:
         default_format: json
+        include_format: false
+
+fos_user:
+    db_driver: mongodb
+    firewall_name: api
+    user_class: Codeforges\SpotRadar\SpotApiBundle\Models\User
+
+fos_oauth_server:
+    db_driver:           mongodb
+    client_class:        Codeforges\SpotRadar\SpotApiBundle\Models\Client
+    access_token_class:  Codeforges\SpotRadar\SpotApiBundle\Models\AccessToken
+    refresh_token_class: Codeforges\SpotRadar\SpotApiBundle\Models\RefreshToken
+    auth_code_class:     Codeforges\SpotRadar\SpotApiBundle\Models\AuthCode
+    service:
+        user_provider: fos_user.user_manager             # This property will be used when valid credentials are given to load the user upon access token creation
