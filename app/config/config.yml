@@ -60,7 +60,7 @@ doctrine_mongodb:
     default_database: SPOT_RADAR
     document_managers:
        default:
-          auto_mapping: false
+          auto_mapping: true
           mappings:
               SpotApiBundle:
                   type: annotation
