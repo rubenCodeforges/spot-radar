@@ -2,7 +2,7 @@
 
 namespace Codeforges\SpotRadar\SpotApiBundle\Models;
 
-use FOS\UserBundle\Model\User as BaseUser;
+use FOS\UserBundle\Document\User as BaseUser;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
@@ -15,13 +15,4 @@ class User extends BaseUser
      */
     protected $id;
 
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $username;
-
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $email;
 }
