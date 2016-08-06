@@ -16,8 +16,16 @@ security:
         oauth_token:                                   # Everyone can access the access token URL.
             pattern: ^/oauth/v2/token
             security: false
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            form_login:
+                provider: fos_userbundle
+                check_path: vp_global_login_check
+                login_path: vp_global_login
+            anonymous: true
+            context: test_connect
         api:
-            pattern: ^/api
+            pattern: ^/api/v2
             fos_oauth: true
             stateless: true
-            anonymous: false
+            anonymous: true
