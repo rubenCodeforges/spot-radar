@@ -25,4 +25,4 @@ class AccessToken extends BaseAccessToken
      * @MongoDB\ReferenceOne(targetDocument="User")
      */
     protected $user;
-}
+}   

@@ -77,7 +77,7 @@ fos_rest:
 
 fos_user:
     db_driver: mongodb
-    firewall_name: api
+    firewall_name: main
     user_class: Codeforges\SpotRadar\SpotApiBundle\Models\User
 
 fos_oauth_server:
@@ -87,4 +87,4 @@ fos_oauth_server:
     refresh_token_class: Codeforges\SpotRadar\SpotApiBundle\Models\RefreshToken
     auth_code_class:     Codeforges\SpotRadar\SpotApiBundle\Models\AuthCode
     service:
-        user_provider: fos_user.user_manager             # This property will be used when valid credentials are given to load the user upon access token creation
+        user_provider: fos_user.user_manager
