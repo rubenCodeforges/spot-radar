@@ -68,6 +68,12 @@ doctrine_mongodb:
                   prefix: 'Codeforges\SpotRadar\SpotApiBundle\'
                   is_bundle: true
 
+              SpotAuthServerBundle:
+                  type: annotation
+                  dir: Models/
+                  prefix: 'Codeforges\SpotRadar\SpotAuthServerBundle\'
+                  is_bundle: true
+
 fos_rest:
     view:
         view_response_listener: force
@@ -82,9 +88,9 @@ fos_user:
 
 fos_oauth_server:
     db_driver:           mongodb
-    client_class:        Codeforges\SpotRadar\SpotApiBundle\Models\Client
-    access_token_class:  Codeforges\SpotRadar\SpotApiBundle\Models\AccessToken
-    refresh_token_class: Codeforges\SpotRadar\SpotApiBundle\Models\RefreshToken
-    auth_code_class:     Codeforges\SpotRadar\SpotApiBundle\Models\AuthCode
+    client_class:        Codeforges\SpotRadar\SpotAuthServerBundle\Models\Client
+    access_token_class:  Codeforges\SpotRadar\SpotAuthServerBundle\Models\AccessToken
+    refresh_token_class: Codeforges\SpotRadar\SpotAuthServerBundle\Models\RefreshToken
+    auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Models\AuthCode
     service:
         user_provider: fos_user.user_manager

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Codeforges\SpotRadar\SpotApiBundle\Models;
+namespace Codeforges\SpotRadar\SpotAuthServerBundle\Models;
 
 use FOS\OAuthServerBundle\Document\AuthCode as BaseAuthCode;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
@@ -23,7 +23,7 @@ class AuthCode extends BaseAuthCode
     protected $client;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="User")
+     * @MongoDB\ReferenceOne(targetDocument="SpotApiBundle/Models/User")
      */
     protected $user;
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace Codeforges\SpotRadar\SpotApiBundle\Command;
+namespace Codeforges\SpotRadar\SpotAuthServerBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
