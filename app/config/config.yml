@@ -75,6 +75,7 @@ doctrine_mongodb:
                   is_bundle: true
 
 fos_rest:
+    param_fetcher_listener: true
     view:
         view_response_listener: force
     routing_loader:
