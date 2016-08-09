@@ -16,14 +16,13 @@ class MarkerController extends SpotRestController
         return  $this->getBundleRepository('\Marker')->findAll();
     }
     
-    public function getMarkerAction($id) {
-        return $this->getBundleRepository('\Marker')->find($id);
+    public function getMarkerAction(Marker $marker) {
+        return $marker;
     }
 
-    public function putMarkerAction($type, Request $request) {
+    public function putMarkerAction($type) {
         $marker = new Marker();
         $marker->setType($type);
-        $marker->setDescription($request);
         $marker->setLocation(array(
             "lat"=> 1.3,
             "lng"=> 1.2
