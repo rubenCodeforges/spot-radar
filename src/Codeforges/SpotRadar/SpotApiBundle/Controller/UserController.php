@@ -1,11 +1,13 @@
 <?php
 namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 
+use Codeforges\SpotRadar\SpotApiBundle\Models\User;
 use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class UserController extends SpotRestController
 {
@@ -31,16 +33,18 @@ class UserController extends SpotRestController
     }
 
     /**
-     * @QueryParam(name="page")
+     * @RequestParam(name="user")
+     * @ParamConverter("user", converter="fos_rest.request_body")
      */
-    public function postUserAction(ParamFetcher $paramFetcher) {
-        return $paramFetcher->get('page');
+    public function postUsersAction(User $user) {
+//        $request = $paramFetcher->get('user');
+//        $user = new User();
+        var_dump($user);
+        die;
+        return $user->getUsername();
         //$this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
     }
 
-    /**
-     * @QueryParam(name="page")
-     */
     public function getUserAction(ParamFetcher $paramFetcher)
     {
         return $paramFetcher;
