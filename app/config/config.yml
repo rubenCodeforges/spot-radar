@@ -29,6 +29,11 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    serializer:
+        enabled: true
+
+sensio_framework_extra:
+    request: { converters: true }
 
 # Doctrine Configuration
 doctrine:
@@ -81,6 +86,8 @@ fos_rest:
     routing_loader:
         default_format: json
         include_format: false
+    body_converter:
+        enabled: true
 
 fos_user:
     db_driver: mongodb
@@ -95,3 +102,10 @@ fos_oauth_server:
     auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Models\AuthCode
     service:
         user_provider: fos_user.user_manager
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+            FOSUserBundle:
+                namespace_prefix: "FOS\\UserBundle"
+                path: '%kernel.root_dir%/config/serializer/FosUserBundle'
