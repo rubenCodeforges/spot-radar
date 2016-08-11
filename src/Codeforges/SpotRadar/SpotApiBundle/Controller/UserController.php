@@ -3,8 +3,10 @@ namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 
 use Codeforges\SpotRadar\SpotApiBundle\Models\User;
 use FOS\RestBundle\Request\ParamFetcher;
+use JMS\Serializer\Exception\ValidationFailedException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -34,15 +36,21 @@ class UserController extends SpotRestController
 
     /**
      * @RequestParam(name="user")
-     * @ParamConverter("user", converter="fos_rest.request_body")
      */
-    public function postUsersAction(User $user) {
-//        $request = $paramFetcher->get('user');
-//        $user = new User();
-        var_dump($user);
-        die;
-        return $user->getUsername();
-        //$this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
+    public function postUsersAction(ParamFetcher $paramFetcher){
+        $userRequest = $paramFetcher->get('user');
+        $user = new User();
+        $user->setUsername($userRequest["username"]);
+        $user->setEmail($userRequest["email"]);
+
+        if(!$userRequest || !$user->getEmail()){
+            throw new BadRequestHttpException("No user object");
+        }
+
+        $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
+
+        return Response::HTTP_ACCEPTED;
+
     }
 
     public function getUserAction(ParamFetcher $paramFetcher)
