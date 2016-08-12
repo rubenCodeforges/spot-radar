@@ -1,6 +1,6 @@
 <?php
 
-namespace Codeforges\SpotRadar\SpotAuthServerBundle\Models;
+namespace Codeforges\SpotRadar\SpotAuthServerBundle\Model;
 
 use FOS\OAuthServerBundle\Document\RefreshToken as BaseRefreshToken;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
@@ -21,7 +21,7 @@ class RefreshToken extends BaseRefreshToken
     protected $client;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="SpotApiBundle/Models/User")
+     * @MongoDB\ReferenceOne(targetDocument="SpotApiBundle/Model/User")
      */
     protected $user;
 }
