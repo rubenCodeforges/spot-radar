@@ -69,18 +69,20 @@ doctrine_mongodb:
           mappings:
               SpotApiBundle:
                   type: annotation
-                  dir: Models/
+                  dir: Model/
                   prefix: 'Codeforges\SpotRadar\SpotApiBundle\'
                   is_bundle: true
 
               SpotAuthServerBundle:
                   type: annotation
-                  dir: Models/
+                  dir: Model/
                   prefix: 'Codeforges\SpotRadar\SpotAuthServerBundle\'
                   is_bundle: true
 
 fos_rest:
     param_fetcher_listener: true
+    serializer:
+        serialize_null: true
     view:
         view_response_listener: force
     routing_loader:
@@ -92,20 +94,26 @@ fos_rest:
 fos_user:
     db_driver: mongodb
     firewall_name: main
-    user_class: Codeforges\SpotRadar\SpotApiBundle\Models\User
+    user_class: Codeforges\SpotRadar\SpotApiBundle\Model\User
 
 fos_oauth_server:
     db_driver:           mongodb
-    client_class:        Codeforges\SpotRadar\SpotAuthServerBundle\Models\Client
-    access_token_class:  Codeforges\SpotRadar\SpotAuthServerBundle\Models\AccessToken
-    refresh_token_class: Codeforges\SpotRadar\SpotAuthServerBundle\Models\RefreshToken
-    auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Models\AuthCode
+    client_class:        Codeforges\SpotRadar\SpotAuthServerBundle\Model\Client
+    access_token_class:  Codeforges\SpotRadar\SpotAuthServerBundle\Model\AccessToken
+    refresh_token_class: Codeforges\SpotRadar\SpotAuthServerBundle\Model\RefreshToken
+    auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Model\AuthCode
     service:
         user_provider: fos_user.user_manager
 jms_serializer:
+    property_naming:
+            separator:  _
+            lower_case: true
     metadata:
         auto_detection: true
         directories:
             FOSUserBundle:
-                namespace_prefix: "FOS\\UserBundle"
+                namespace_prefix: FOS\UserBundle
                 path: '%kernel.root_dir%/config/serializer/FosUserBundle'
+            SpotApi:
+                namespace_prefix: Codeforges\SpotRaadar\SpotApiBundle
+                path: '%kernel.root_dir%\..\src\Codeforges\SpotRadar\SpotApiBundle\Resources\config\serializer'

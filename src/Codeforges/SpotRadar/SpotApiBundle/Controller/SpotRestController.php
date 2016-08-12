@@ -8,6 +8,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 class SpotRestController extends FOSRestController
 {
     protected function getBundleRepository(string $repositoryName): ObjectRepository {
-        return $this->get('doctrine_mongodb')->getRepository(SpotApiBundle::$BUNDLE_PATH.'\Models'.$repositoryName);
+        return $this->get('doctrine_mongodb')->getRepository(SpotApiBundle::$BUNDLE_PATH.'\Model'.$repositoryName);
     }
 }

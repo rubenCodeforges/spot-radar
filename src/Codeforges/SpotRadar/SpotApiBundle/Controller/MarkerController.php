@@ -3,11 +3,7 @@
 namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 
 
-use Codeforges\SpotRadar\SpotApiBundle\Models\Marker;
-use Codeforges\SpotRadar\SpotApiBundle\SpotApiBundle;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Request\RequestBodyParamConverter;
-use Symfony\Component\HttpFoundation\Request;
+use Codeforges\SpotRadar\SpotApiBundle\Model\Marker;
 
 
 class MarkerController extends SpotRestController

@@ -1,18 +1,15 @@
 <?php
-namespace Codeforges\SpotRadar\SpotApiBundle\Models;
+namespace Codeforges\SpotRadar\SpotApiBundle\Model;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
+
 /**
  * @MongoDB\Document
- * @ExclusionPolicy("all")
  */
 class Marker
 {
     /**
      * @MongoDB\Id
-     * @Expose
      */
     protected $id;
 
@@ -23,13 +20,11 @@ class Marker
 
     /**
      * @MongoDB\Field(type="string")
-     * @Expose
      */
     protected $description;
 
     /**
      * @MongoDB\Field(type="hash")
-     * @Expose
      */
     protected $location;
 
