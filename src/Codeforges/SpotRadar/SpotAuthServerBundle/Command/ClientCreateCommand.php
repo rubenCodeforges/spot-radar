@@ -54,7 +54,7 @@ class ClientCreateCommand extends ContainerAwareCommand
             $client->getSecret()));
         
         //TODO: Add check for db driver type
-        $customers = $container->get('doctrine_mongodb')->getRepository('SpotApiBundle:Model\User')->findAll();
+        $customers = $container->get('doctrine_mongodb')->getRepository('SpotApiBundle:Document\User')->findAll();
 
         foreach ($customers as $customer) {
             $queryData = [];

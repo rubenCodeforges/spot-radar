@@ -18,7 +18,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Codeforges\SpotRadar\SpotApiBundle\Model\User',
+            'data_class' => 'Codeforges\SpotRadar\SpotApiBundle\Document\User',
         ));
     }
 

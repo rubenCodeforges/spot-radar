@@ -1,5 +1,5 @@
 <?php
-namespace Codeforges\SpotRadar\SpotApiBundle\Model;
+namespace Codeforges\SpotRadar\SpotApiBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 

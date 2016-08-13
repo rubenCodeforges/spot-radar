@@ -3,7 +3,7 @@
 namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 
 
-use Codeforges\SpotRadar\SpotApiBundle\Model\Marker;
+use Codeforges\SpotRadar\SpotApiBundle\Document\Marker;
 
 
 class MarkerController extends SpotRestController

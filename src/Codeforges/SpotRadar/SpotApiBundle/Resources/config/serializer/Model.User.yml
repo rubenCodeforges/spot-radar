@@ -1,2 +1,2 @@
-Codeforges\SpotRadar\SpotApiBundle\Model\User:
+Codeforges\SpotRadar\SpotApiBundle\Document\User:
     exclusion_policy: ALL

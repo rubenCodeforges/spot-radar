@@ -103,7 +103,7 @@ class RegistrationController extends SpotRestController
     /**
      * Authenticate a user with Symfony Security
      *
-     * @param \FOS\UserBundle\Model\UserInterface        $user
+     * @param \FOS\UserBundle\Document\UserInterface        $user
      * @param \Symfony\Component\HttpFoundation\Response $response
      */
     protected function authenticateUser(UserInterface $user, Response $response)
