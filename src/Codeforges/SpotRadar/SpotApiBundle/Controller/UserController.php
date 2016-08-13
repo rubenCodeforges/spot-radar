@@ -1,11 +1,10 @@
 <?php
 namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 
-use Codeforges\SpotRadar\SpotApiBundle\Model\User;
+use Codeforges\SpotRadar\SpotApiBundle\Document\User;
+use Codeforges\SpotRadar\SpotApiBundle\Model\ValidationMessage;
 use Codeforges\SpotRadar\SpotApiBundle\Type\UserType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\Annotations\View;
 
 class UserController extends SpotRestController
 {
@@ -24,10 +23,14 @@ class UserController extends SpotRestController
             $dm->persist($user);
             $dm->flush();
 
-            return new Response(array( "success"=> Response::HTTP_ACCEPTED ), Response::HTTP_ACCEPTED);
+            $validationMessage = new ValidationMessage(ValidationMessage::$VALIDATION_SUCCESS);
+
+            return $validationMessage->getResponse();
         }
 
-        return new Response($form->getErrors(),400);
+        $validationResponse = new ValidationMessage(ValidationMessage::$VALIDATION_ERROR);
+
+        return $validationResponse->getResponse($form);
     }
 
     /**
@@ -40,5 +43,7 @@ class UserController extends SpotRestController
         $view = $this->view($users, 200);
         return $this->handleView($view);
     }
+
+   
 }
 

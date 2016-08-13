@@ -1,9 +1,9 @@
 <?php
 
-namespace Codeforges\SpotRadar\SpotAuthServerBundle\Model;
+namespace Codeforges\SpotRadar\SpotAuthServerBundle\Document;
 
-use FOS\OAuthServerBundle\Document\Client as BaseClient;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use FOS\OAuthServerBundle\Document\Client as BaseClient;
 
 /**
  * @MongoDB\Document

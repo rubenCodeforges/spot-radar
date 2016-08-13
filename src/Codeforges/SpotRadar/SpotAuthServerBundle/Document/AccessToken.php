@@ -1,10 +1,10 @@
 <?php
 
-namespace Codeforges\SpotRadar\SpotAuthServerBundle\Model;
+namespace Codeforges\SpotRadar\SpotAuthServerBundle\Document;
 
-use FOS\OAuthServerBundle\Document\AccessToken as BaseAccessToken;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use FOS\OAuthServerBundle\Model\ClientInterface;
+use FOS\OAuthServerBundle\Document\AccessToken as BaseAccessToken;
+use FOS\OAuthServerBundle\Document\ClientInterface;
 
 /**
  * @MongoDB\Document
@@ -22,7 +22,7 @@ class AccessToken extends BaseAccessToken
     protected $client;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="SpotApiBundle/Model/User")
+     * @MongoDB\ReferenceOne(targetDocument="SpotApiBundle/Document/User")
      */
     protected $user;
 }   

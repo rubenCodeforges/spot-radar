@@ -69,13 +69,13 @@ doctrine_mongodb:
           mappings:
               SpotApiBundle:
                   type: annotation
-                  dir: Model/
+                  dir: Document/
                   prefix: 'Codeforges\SpotRadar\SpotApiBundle\'
                   is_bundle: true
 
               SpotAuthServerBundle:
                   type: annotation
-                  dir: Model/
+                  dir: Document/
                   prefix: 'Codeforges\SpotRadar\SpotAuthServerBundle\'
                   is_bundle: true
 
@@ -95,14 +95,14 @@ fos_rest:
 fos_user:
     db_driver: mongodb
     firewall_name: main
-    user_class: Codeforges\SpotRadar\SpotApiBundle\Model\User
+    user_class: Codeforges\SpotRadar\SpotApiBundle\Document\User
 
 fos_oauth_server:
     db_driver:           mongodb
-    client_class:        Codeforges\SpotRadar\SpotAuthServerBundle\Model\Client
-    access_token_class:  Codeforges\SpotRadar\SpotAuthServerBundle\Model\AccessToken
-    refresh_token_class: Codeforges\SpotRadar\SpotAuthServerBundle\Model\RefreshToken
-    auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Model\AuthCode
+    client_class:        Codeforges\SpotRadar\SpotAuthServerBundle\Document\Client
+    access_token_class:  Codeforges\SpotRadar\SpotAuthServerBundle\Document\AccessToken
+    refresh_token_class: Codeforges\SpotRadar\SpotAuthServerBundle\Document\RefreshToken
+    auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Document\AuthCode
     service:
         user_provider: fos_user.user_manager
 jms_serializer:
