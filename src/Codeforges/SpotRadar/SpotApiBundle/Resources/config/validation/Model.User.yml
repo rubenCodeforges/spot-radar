@@ -1,0 +1,5 @@
+Codeforges\SpotRadar\SpotApiBundle\Model\User:
+     properties:
+            email:
+                - NotBlank: ~
+                - Email: ~
