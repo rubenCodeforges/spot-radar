@@ -28,9 +28,10 @@ class ValidationMessage
         $this->title = $this->getMessageTitle($errorTitle);
     }
 
+
     /**
      * @param FormInterface|null $form
-     * @param null $data
+     * @param array|null $data
      * @return JsonResponse
      */
     public function getResponse(FormInterface $form = null, array $data = null): JsonResponse {
