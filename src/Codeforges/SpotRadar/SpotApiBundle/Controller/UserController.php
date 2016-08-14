@@ -6,7 +6,7 @@ use Codeforges\SpotRadar\SpotApiBundle\Model\ValidationMessage;
 use Codeforges\SpotRadar\SpotApiBundle\Type\UserType;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserController extends SpotRestController
+class UserController extends RestController
 {
 
     public function postUsersAction(Request $request){
@@ -43,7 +43,6 @@ class UserController extends SpotRestController
         $view = $this->view($users, 200);
         return $this->handleView($view);
     }
-
    
 }
 

@@ -6,7 +6,7 @@ namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 use Codeforges\SpotRadar\SpotApiBundle\Document\Marker;
 
 
-class MarkerController extends SpotRestController
+class MarkerController extends RestController
 {
     public function getMarkersAction() {
         return  $this->getBundleRepository('\Marker')->findAll();
