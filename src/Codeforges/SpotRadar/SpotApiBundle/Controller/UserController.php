@@ -4,12 +4,19 @@ namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 use Codeforges\SpotRadar\SpotApiBundle\Document\User;
 use Codeforges\SpotRadar\SpotApiBundle\Model\ValidationMessage;
 use Codeforges\SpotRadar\SpotApiBundle\Type\UserType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends RestController
 {
 
-    public function postUsersAction(Request $request){
+    /**
+     * register new user
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function postUsersAction(Request $request): JsonResponse{
         
         $dm = $this->get('doctrine_mongodb')->getManager();
 
@@ -36,7 +43,7 @@ class UserController extends RestController
     /**
      * @View(serializerGroups={"user"})
      */
-    public function getUserAllAction()
+    public function getUserAllAction(): Response
     {
         $users = $this->getBundleRepository('\User')->findAll();
 
