@@ -30,9 +30,10 @@ class ValidationMessage
 
     /**
      * @param FormInterface|null $form
+     * @param null $data
      * @return JsonResponse
      */
-    public function getResponse(FormInterface $form = null): JsonResponse {
+    public function getResponse(FormInterface $form = null, array $data = null): JsonResponse {
         $response = [
             "title"=> $this->title,
             "type"=> $this->type,
@@ -40,6 +41,8 @@ class ValidationMessage
         
         if($this->hasErrors()) {
             $response["errors"] = $this->getValidationErrorMessages($form);
+        } else if($data){
+            $response["data"] = $data;
         }
         
         return new JsonResponse( $response, $this->getStatusCode());

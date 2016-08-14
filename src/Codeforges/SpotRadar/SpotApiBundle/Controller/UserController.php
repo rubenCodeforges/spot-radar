@@ -33,7 +33,7 @@ class UserController extends RestController
 
             $validationMessage = new ValidationMessage(ValidationMessage::$VALIDATION_SUCCESS);
 
-            return $validationMessage->getResponse();
+            return $validationMessage->getResponse(null, [ "email" => $user->getEmail() ]);
         }
 
         $validationResponse = new ValidationMessage(ValidationMessage::$VALIDATION_ERROR);
