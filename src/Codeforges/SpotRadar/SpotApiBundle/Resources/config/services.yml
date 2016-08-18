@@ -1,4 +1,4 @@
 services:
-#    spot_api.example:
-#        class: Codeforges\SpotRadar\SpotApiBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    spot_api.auth_service:
+        class: Codeforges\SpotRadar\SpotApiBundle\DependencyInjection\AuthService
+        arguments: ["@service_container"]

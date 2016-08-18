@@ -1,23 +1,26 @@
 <?php
 namespace Codeforges\SpotRadar\SpotApiBundle\Controller;
 
+use Codeforges\SpotRadar\SpotApiBundle\DependencyInjection\AuthService;
+use Codeforges\SpotRadar\SpotApiBundle\DependencyInjection\UserAuthCredentials;
 use Codeforges\SpotRadar\SpotApiBundle\Document\User;
 use Codeforges\SpotRadar\SpotApiBundle\Model\ValidationMessage;
 use Codeforges\SpotRadar\SpotApiBundle\Type\UserType;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 
 class UserController extends RestController
 {
-
+    
     /**
      * register new user
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function postUsersAction(Request $request): JsonResponse{
+    public function postUsersAction(Request $request){
         
         $dm = $this->get('doctrine_mongodb')->getManager();
 
@@ -37,7 +40,7 @@ class UserController extends RestController
         }
 
         $validationResponse = new ValidationMessage(ValidationMessage::$VALIDATION_ERROR);
-
+        
         return $validationResponse->getResponse($form);
     }
 
@@ -50,6 +53,19 @@ class UserController extends RestController
 
         $view = $this->view($users, 200);
         return $this->handleView($view);
+    }
+
+    /**
+     * @QueryParam(name="auth")
+     */
+    public function loginUserAction(ParamFetcher $paramFetcher) {
+        $authService = $this->get('spot_api.auth_service');
+
+        $params = $authService->getOAuthParams(
+            $paramFetcher->get(AuthService::AUTH_PARAM_NAME)
+        );
+
+        return $this->redirectToRoute('fos_oauth_server_token', $params);
     }
    
 }
