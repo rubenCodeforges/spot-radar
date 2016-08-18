@@ -1,6 +1,4 @@
-spot-radar-api
+# spot-radar-api
 ================
 
-# **Description**
-
-The Idea behind this project is to create a system-framework for report lost-found items.
+The Spot radar is a construct that allows to build web apps such as TripAdvisor or any kind of apps that utilize heavy use of maps , markers and user interaction

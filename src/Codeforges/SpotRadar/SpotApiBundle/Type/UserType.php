@@ -12,7 +12,7 @@ class UserType extends AbstractType
     {
         $builder->add('username', 'text');
         $builder->add('email', 'email');
-        $builder->add('password', 'password');
+        $builder->add('plain_password', 'password');
     }
 
     public function configureOptions(OptionsResolver $resolver)

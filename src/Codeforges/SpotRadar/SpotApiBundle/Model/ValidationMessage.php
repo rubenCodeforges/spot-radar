@@ -2,6 +2,7 @@
 
 namespace Codeforges\SpotRadar\SpotApiBundle\Model;
 
+use FOS\RestBundle\View\View;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -28,11 +29,13 @@ class ValidationMessage
         $this->title = $this->getMessageTitle($errorTitle);
     }
 
+
     /**
      * @param FormInterface|null $form
+     * @param array|null $data
      * @return JsonResponse
      */
-    public function getResponse(FormInterface $form = null): JsonResponse {
+    public function getResponse(FormInterface $form = null, array $data = null) {
         $response = [
             "title"=> $this->title,
             "type"=> $this->type,
@@ -40,9 +43,11 @@ class ValidationMessage
         
         if($this->hasErrors()) {
             $response["errors"] = $this->getValidationErrorMessages($form);
+        } else if($data){
+            $response["data"] = $data;
         }
         
-        return new JsonResponse( $response, $this->getStatusCode());
+        return View::create($response, $this->getStatusCode());
     }
     
     private function getStatusCode(): int {
