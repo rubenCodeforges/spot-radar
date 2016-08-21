@@ -115,12 +115,5 @@ jms_serializer:
         auto_detection: true
         directories:
             FOSUserBundle:
-                namespace_prefix: FOS\UserBundle
-                path: '%kernel.root_dir%/config/serializer/FosUserBundle'
-            CFRest:
-                namespace_prefix: Codeforges\CFRest\ApiBundle
-                path: '%kernel.root_dir%\..\src\Codeforges\CFRest\ApiBundle\Resources\config\serializer'
-
-            SpotApi:
-                namespace_prefix: Codeforges\SpotApiBundle
-                path: '%kernel.root_dir%\..\src\Codeforges\SpotApiBundle\Resources\config\serializer'
+                namespace_prefix: 'FOS\UserBundle'
+                path: '%kernel.root_dir%/Resources/serializer/FOSUserBundle'

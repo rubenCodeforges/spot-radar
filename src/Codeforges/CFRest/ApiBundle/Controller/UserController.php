@@ -1,6 +1,7 @@
 <?php
 namespace Codeforges\CFRest\ApiBundle\Controller;
 
+use Codeforges\CFRest\ApiBundle\ApiBundle;
 use Codeforges\CFRest\ApiBundle\DependencyInjection\AuthService;
 use Codeforges\CFRest\ApiBundle\DependencyInjection\UserAuthCredentials;
 use Codeforges\CFRest\ApiBundle\Document\User;
@@ -14,7 +15,15 @@ use FOS\RestBundle\Controller\Annotations\View;
 
 class UserController extends RestController
 {
-    
+    /**
+     * UserController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct(ApiBundle::$BUNDLE_PATH);
+    }
+
+
     /**
      * register new user
      * @param Request $request
@@ -49,7 +58,7 @@ class UserController extends RestController
      */
     public function getUserAllAction(): Response
     {
-        $users = $this->getBundleRepository('\User')->findAll();
+        $users = $this->getBundleRepository('User')->findAll();
 
         $view = $this->view($users, 200);
         return $this->handleView($view);
