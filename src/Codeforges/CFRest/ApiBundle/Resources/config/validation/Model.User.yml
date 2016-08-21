@@ -1,0 +1,10 @@
+Codeforges\CFRest\ApiBundle\Document\User:
+      constraints:
+              - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: username
+              - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: email
+      properties:
+            email:
+                - NotBlank: ~
+                - Email: ~
+            username:
+                - NotBlank: ~

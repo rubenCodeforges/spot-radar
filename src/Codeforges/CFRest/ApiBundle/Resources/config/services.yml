@@ -1,0 +1,4 @@
+services:
+    spot_api.auth_service:
+        class: Codeforges\CFRest\ApiBundle\DependencyInjection\AuthService
+        arguments: ["@service_container"]

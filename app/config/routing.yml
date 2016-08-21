@@ -1,9 +1,9 @@
 spot_api_v1:
-    resource: "@SpotApiBundle/Resources/config/routing.yml"
+    resource: "@ApiBundle/Resources/config/routing.yml"
     prefix:   /api/v1
 
 spot_auth_v2:
-    resource: "@SpotAuthServerBundle/Resources/config/routing.yml"
+    resource: "@AuthServerBundle/Resources/config/routing.yml"
 
 # FOSUserBundle
 #fos_user_security:
