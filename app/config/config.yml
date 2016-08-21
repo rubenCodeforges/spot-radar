@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: '@SpotApiBundle/Resources/config/services.yml' }
+    - { resource: '@ApiBundle/Resources/config/services.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -68,16 +68,16 @@ doctrine_mongodb:
        default:
           auto_mapping: true
           mappings:
-              SpotApiBundle:
+              ApiBundle:
                   type: annotation
                   dir: Document/
-                  prefix: 'Codeforges\SpotRadar\SpotApiBundle\'
+                  prefix: 'Codeforges\CFRest\ApiBundle\'
                   is_bundle: true
 
-              SpotAuthServerBundle:
+              AuthServerBundle:
                   type: annotation
                   dir: Document/
-                  prefix: 'Codeforges\SpotRadar\SpotAuthServerBundle\'
+                  prefix: 'Codeforges\CFRest\AuthServerBundle\'
                   is_bundle: true
 
 fos_rest:
@@ -96,14 +96,14 @@ fos_rest:
 fos_user:
     db_driver: mongodb
     firewall_name: main
-    user_class: Codeforges\SpotRadar\SpotApiBundle\Document\User
+    user_class: Codeforges\CFRest\ApiBundle\Document\User
 
 fos_oauth_server:
     db_driver:           mongodb
-    client_class:        Codeforges\SpotRadar\SpotAuthServerBundle\Document\Client
-    access_token_class:  Codeforges\SpotRadar\SpotAuthServerBundle\Document\AccessToken
-    refresh_token_class: Codeforges\SpotRadar\SpotAuthServerBundle\Document\RefreshToken
-    auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Document\AuthCode
+    client_class:        Codeforges\CFRest\AuthServerBundle\Document\Client
+    access_token_class:  Codeforges\CFRest\AuthServerBundle\Document\AccessToken
+    refresh_token_class: Codeforges\CFRest\AuthServerBundle\Document\RefreshToken
+    auth_code_class:     Codeforges\CFRest\AuthServerBundle\Document\AuthCode
     service:
         user_provider: fos_user.user_manager
 jms_serializer:
@@ -117,5 +117,5 @@ jms_serializer:
                 namespace_prefix: FOS\UserBundle
                 path: '%kernel.root_dir%/config/serializer/FosUserBundle'
             SpotApi:
-                namespace_prefix: Codeforges\SpotRaadar\SpotApiBundle
-                path: '%kernel.root_dir%\..\src\Codeforges\SpotRadar\SpotApiBundle\Resources\config\serializer'
+                namespace_prefix: Codeforges\SpotRaadar\ApiBundle
+                path: '%kernel.root_dir%\..\src\Codeforges\CFRest\ApiBundle\Resources\config\serializer'

@@ -1,4 +1,0 @@
-services:
-    spot_api.auth_service:
-        class: Codeforges\SpotRadar\SpotApiBundle\DependencyInjection\AuthService
-        arguments: ["@service_container"]

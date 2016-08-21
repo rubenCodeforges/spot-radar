@@ -20,8 +20,8 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Codeforges\SpotRadar\SpotApiBundle\SpotApiBundle(),
-            new Codeforges\SpotRadar\SpotAuthServerBundle\SpotAuthServerBundle()
+            new Codeforges\CFRest\ApiBundle\ApiBundle(),
+            new Codeforges\CFRest\AuthServerBundle\AuthServerBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
