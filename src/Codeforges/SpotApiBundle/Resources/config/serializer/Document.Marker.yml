@@ -1,5 +1,11 @@
 Codeforges\SpotApiBundle\Document\Marker:
     exclusion_policy: ALL
     properties:
+        id:
+            expose: true
         type:
+            expose: true
+        location:
+            expose: true
+        user:
             expose: true

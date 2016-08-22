@@ -29,6 +29,11 @@ class Marker
      */
     protected $location;
 
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Codeforges\CFRest\ApiBundle\Document\User" , inversedBy="markers")
+     */
+    protected $user;
+    
 
     /**
      * Get id
@@ -87,7 +92,7 @@ class Marker
     /**
      * Set location
      *
-     * @param array $location
+     * @param hash $location
      * @return $this
      */
     public function setLocation($location)
@@ -99,10 +104,34 @@ class Marker
     /**
      * Get location
      *
-     * @return array $location
+     * @return hash $location
      */
     public function getLocation()
     {
         return $this->location;
+    }
+    
+
+
+    /**
+     * Set user
+     *
+     * @param Codeforges\CFRest\ApiBundle\Document\User $user
+     * @return $this
+     */
+    public function setUser(\Codeforges\CFRest\ApiBundle\Document\User $user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Codeforges\CFRest\ApiBundle\Document\User $user
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

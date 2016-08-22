@@ -23,4 +23,23 @@ class RestController extends FOSRestController
         return $this->get('doctrine_mongodb')->getRepository($this->bundlePath.'\Document\\'.$repositoryName);
     }
 
+    protected function getView($document)
+    {
+        $view = $document ?
+            $this->view($document, 200) : $this->getErrorView();
+        
+        return $this->handleView($view);
+    }
+
+    private function getErrorView($code = 404 , $message = "Not Found") {
+        $response = [
+            "error"=> [
+                "code"=> $code,
+                "message"=> $message
+            ]
+        ];
+
+        return $this->view($response, $code);
+    }
+
 }
