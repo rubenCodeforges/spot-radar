@@ -29,9 +29,9 @@ class UserController extends RestController
     public function postUsersAction(Request $request){
 
         $form = $this->createForm(new UserType(), new User());
-        $user = $form->getData();
 
-        return $this->getFormHandler()
+        return $this
+            ->getFormHandler()
             ->processForm($form, $request)
             ->getResponse();
     }

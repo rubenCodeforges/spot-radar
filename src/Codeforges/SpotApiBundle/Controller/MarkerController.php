@@ -37,30 +37,22 @@ class MarkerController extends RestController implements ClassResourceInterface
 
     public function postAction(Request $request)
     {
-        $dm = $this->get('doctrine_mongodb')->getManager();
-
         $form = $this->createForm(new MarkerType(), new Marker());
-
-        $form->submit($request);
-
-        if ($form->isValid()) {
-            $marker = $form->getData();
-
-            $dm->persist($marker);
-            $dm->flush();
-
-            $validationMessage = new ValidationMessage(ValidationMessage::$VALIDATION_SUCCESS);
-
-            return $validationMessage->getResponse();
-        }
-
-        $validationResponse = new ValidationMessage(ValidationMessage::$VALIDATION_ERROR);
-
-        return $validationResponse->getResponse($form);
+        
+        return $this
+            ->getFormHandler()
+            ->processForm($form, $request)
+            ->getResponse();
     }
 
-    public function putAction(Marker $marker)
+    public function putAction($id, Request $request)
     {
+        $marker = $marker = $this->getBundleRepository('Marker')->find($id);
+        $form = $this->createForm(new MarkerType(), $marker);
         
+        return $this
+            ->getFormHandler()
+            ->processForm($form, $request)
+            ->getResponse();
     }
 }

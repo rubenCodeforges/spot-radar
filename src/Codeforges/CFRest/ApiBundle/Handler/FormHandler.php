@@ -50,7 +50,8 @@ class FormHandler implements FormHandlerInterface
         $this->form = $form;
         $this->form->submit($request);
         
-        return  $this->validateForm()
+        return  $this
+            ->validateForm()
             ->prepareValidationMessage();
     }
 
