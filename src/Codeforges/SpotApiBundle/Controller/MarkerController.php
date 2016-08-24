@@ -9,6 +9,7 @@ use Codeforges\SpotApiBundle\SpotApiBundle;
 use Codeforges\SpotApiBundle\Type\MarkerType;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -54,5 +55,19 @@ class MarkerController extends RestController implements ClassResourceInterface
             ->getFormHandler()
             ->processForm($form, $request)
             ->getResponse();
+    }
+    
+    public function deleteAction($id)
+    {
+        $marker = $this->getBundleRepository('Marker')->find($id);
+        $dm = $this->get('doctrine_mongodb')->getManager();
+
+        $dm->remove($marker);
+        $dm->flush();
+
+        return [
+            "title" => "delete success",
+            "type" => 'Marker removed'
+        ];
     }
 }
