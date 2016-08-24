@@ -1,2 +1,5 @@
 Codeforges\CFRest\ApiBundle\Document\User:
     exclusion_policy: ALL
+    properties:
+        email:
+          expose: true

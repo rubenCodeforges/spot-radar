@@ -5,7 +5,6 @@ use Codeforges\CFRest\ApiBundle\ApiBundle;
 use Codeforges\CFRest\ApiBundle\DependencyInjection\AuthService;
 use Codeforges\CFRest\ApiBundle\DependencyInjection\UserAuthCredentials;
 use Codeforges\CFRest\ApiBundle\Document\User;
-use Codeforges\CFRest\ApiBundle\Model\ValidationMessage;
 use Codeforges\CFRest\ApiBundle\Type\UserType;
 use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +14,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 
 class UserController extends RestController
 {
-    /**
-     * UserController constructor.
-     */
+
     public function __construct()
     {
         parent::__construct(ApiBundle::$BUNDLE_PATH);
@@ -30,27 +27,13 @@ class UserController extends RestController
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function postUsersAction(Request $request){
-        
-        $dm = $this->get('doctrine_mongodb')->getManager();
 
         $form = $this->createForm(new UserType(), new User());
+        $user = $form->getData();
 
-        $form->submit($request);
-
-        if ($form->isValid()) {
-            $user = $form->getData();
-
-            $dm->persist($user);
-            $dm->flush();
-
-            $validationMessage = new ValidationMessage(ValidationMessage::$VALIDATION_SUCCESS);
-
-            return $validationMessage->getResponse(null, [ "email" => $user->getEmail() ]);
-        }
-
-        $validationResponse = new ValidationMessage(ValidationMessage::$VALIDATION_ERROR);
-        
-        return $validationResponse->getResponse($form);
+        return $this->getFormHandler()
+            ->processForm($form, $request)
+            ->getResponse();
     }
 
     /**

@@ -2,24 +2,25 @@
 namespace Codeforges\CFRest\ApiBundle\Controller;
 
 use Codeforges\CFRest\ApiBundle\ApiBundle;
+use Codeforges\CFRest\ApiBundle\Handler\FormHandler;
+use Codeforges\CFRest\ApiBundle\Handler\FormHandlerInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
 use FOS\RestBundle\Controller\FOSRestController;
 
 class RestController extends FOSRestController
 {
     protected $bundlePath;
-
-    /**
-     * RestController constructor.
-     * @param $bundlePath
-     */
-    public function __construct($bundlePath)
+    protected $formHandler;
+    
+    public function __construct(string $bundlePath)
     {
         $this->bundlePath = $bundlePath;
     }
 
 
-    protected function getBundleRepository(string $repositoryName): ObjectRepository {
+    protected function getBundleRepository(string $repositoryName): ObjectRepository
+    {
+
         return $this->get('doctrine_mongodb')->getRepository($this->bundlePath.'\Document\\'.$repositoryName);
     }
 
@@ -31,7 +32,15 @@ class RestController extends FOSRestController
         return $this->handleView($view);
     }
 
-    private function getErrorView($code = 404 , $message = "Not Found") {
+    protected function getFormHandler() : FormHandler
+    {
+        return $this->formHandler ?
+            $this->formHandler : $this->createFormHandler();
+    }
+
+
+    private function getErrorView($code = 404 , $message = "Not Found")
+    {
         $response = [
             "error"=> [
                 "code"=> $code,
@@ -40,6 +49,12 @@ class RestController extends FOSRestController
         ];
 
         return $this->view($response, $code);
+    }
+
+    private function createFormHandler(): FormHandler{
+        $this->formHandler =  new FormHandler( $this->container->get('doctrine_mongodb')->getManager());
+
+        return $this->formHandler;
     }
 
 }

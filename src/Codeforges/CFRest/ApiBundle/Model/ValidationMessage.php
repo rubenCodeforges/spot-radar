@@ -5,6 +5,7 @@ namespace Codeforges\CFRest\ApiBundle\Model;
 use FOS\RestBundle\View\View;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ValidationMessage
 {
@@ -28,23 +29,24 @@ class ValidationMessage
         $this->errors = $errors;
         $this->title = $this->getMessageTitle($errorTitle);
     }
-
-
-    /**
-     * @param FormInterface|null $form
-     * @param array|null $data
-     * @return JsonResponse
-     */
-    public function getResponse(FormInterface $form = null, array $data = null) {
+    
+    public function getValidationResponse(FormInterface $form = null, array $responseData = null)
+    {
         $response = [
             "title"=> $this->title,
             "type"=> $this->type,
         ];
         
-        if($this->hasErrors()) {
+        if($this->hasErrors() && $form) {
             $response["errors"] = $this->getValidationErrorMessages($form);
-        } else if($data){
-            $response["data"] = $data;
+        } else if($responseData){
+            $response["data"] = $responseData;
+        } else if(!$responseData && !$this->hasErrors()){
+            $response["type"] = "accepted";
+        } else {
+            $response = [
+                "error" => Response::HTTP_BAD_REQUEST
+            ];
         }
         
         return View::create($response, $this->getStatusCode());
@@ -52,14 +54,14 @@ class ValidationMessage
     
     private function getStatusCode(): int {
         if($this->hasErrors()){
-            return 400;
+            return Response::HTTP_BAD_REQUEST;
         }
-        
-        return 200;
+
+        return Response::HTTP_ACCEPTED;
     }
     
     private function getMessageTitle(string $title): string {
-            return  !$this->hasErrors() ? "success" : $title;
+        return  !$this->hasErrors() ? "success" : $title;
     }
     
     private function hasErrors(): bool {
