@@ -1,0 +1,11 @@
+Codeforges\SpotApiBundle\Document\Media:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        user:
+            expose: true
+        url:
+            expose: true
+        description:
+            expose: true

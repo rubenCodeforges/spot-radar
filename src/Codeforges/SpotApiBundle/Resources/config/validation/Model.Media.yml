@@ -1,0 +1,4 @@
+Codeforges\SpotApiBundle\Document\Marker:
+      properties:
+            file:
+                - NotBlank: ~
