@@ -1,4 +1,8 @@
 spot_api_v1:
+    resource: "@SpotApiBundle/Resources/config/routing.yml"
+    prefix:   /api/v1
+
+cf_rest_v1:
     resource: "@ApiBundle/Resources/config/routing.yml"
     prefix:   /api/v1
 

@@ -16,4 +16,39 @@ class User extends BaseUser
      * @MongoDB\Id
      */
     protected $id;
+
+    /**
+     * @MongoDB\ReferenceMany(targetDocument="Codeforges\SpotApiBundle\Document\Marker", mappedBy="user")
+     */
+    protected $markers;
+
+    /**
+     * Add marker
+     *
+     * @param Marker $marker
+     */
+    public function addMarker(\Codeforges\SpotApiBundle\Document\Marker $marker)
+    {
+        $this->markers[] = $marker;
+    }
+
+    /**
+     * Remove marker
+     *
+     * @param Codeforges\SpotApiBundle\Document\Marker $marker
+     */
+    public function removeMarker(\Codeforges\SpotApiBundle\Document\Marker $marker)
+    {
+        $this->markers->removeElement($marker);
+    }
+
+    /**
+     * Get markers
+     *
+     * @return \Doctrine\Common\Collections\Collection $markers
+     */
+    public function getMarkers()
+    {
+        return $this->markers;
+    }
 }

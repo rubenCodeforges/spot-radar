@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: '@ApiBundle/Resources/config/services.yml' }
+    - { resource: "@SpotApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -114,8 +115,5 @@ jms_serializer:
         auto_detection: true
         directories:
             FOSUserBundle:
-                namespace_prefix: FOS\UserBundle
-                path: '%kernel.root_dir%/config/serializer/FosUserBundle'
-            SpotApi:
-                namespace_prefix: Codeforges\SpotRaadar\ApiBundle
-                path: '%kernel.root_dir%\..\src\Codeforges\CFRest\ApiBundle\Resources\config\serializer'
+                namespace_prefix: 'FOS\UserBundle'
+                path: '%kernel.root_dir%/Resources/serializer/FOSUserBundle'
