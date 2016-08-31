@@ -122,10 +122,10 @@ class Marker
     /**
      * Set user
      *
-     * @param Codeforges\SpotApiBundle\Document\User $user
+     * @param Codeforges\CFRest\ApiBundle\Document\User $user
      * @return $this
      */
-    public function setUser(\Codeforges\SpotApiBundle\Document\User $user)
+    public function setUser(\Codeforges\CFRest\ApiBundle\Document\User $user)
     {
         $this->user = $user;
         return $this;
@@ -134,7 +134,7 @@ class Marker
     /**
      * Get user
      *
-     * @return Codeforges\SpotApiBundle\Document\User $user
+     * @return Codeforges\CFRest\ApiBundle\Document\User $user
      */
     public function getUser()
     {

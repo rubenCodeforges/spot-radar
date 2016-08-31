@@ -1,6 +1,6 @@
 <?php
 
-namespace Codeforges\CFRest\ApiBundle\DependencyInjection;
+namespace Codeforges\SpotApiBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
