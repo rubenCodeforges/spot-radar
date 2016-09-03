@@ -105,6 +105,12 @@ vich_uploader:
 ivory_base64_file:
     default: true
 
+spot_api:
+#    amazon_s3:
+#        aws_key: %amazon_aws_key%
+#        aws_secret_key: %amazon_aws_secret_key%
+#        base_url:       %amazon_s3_base_url%
+
 fos_rest:
     param_fetcher_listener: true
     disable_csrf_role: true
