@@ -80,6 +80,30 @@ doctrine_mongodb:
                   dir: Document/
                   prefix: 'Codeforges\CFRest\AuthServerBundle\'
                   is_bundle: true
+knp_gaufrette:
+    stream_wrapper: ~
+
+    adapters:
+        media_adapter:
+            local:
+                directory: '%kernel.root_dir%\..\web\media\'
+
+    filesystems:
+        media_fs:
+            adapter:    media_adapter
+
+vich_uploader:
+    db_driver: mongodb
+    storage: gaufrette
+
+    mappings:
+        media_file:
+          uri_prefix: /media
+          upload_destination: media_fs
+
+
+ivory_base64_file:
+    default: true
 
 fos_rest:
     param_fetcher_listener: true

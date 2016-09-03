@@ -1,6 +1,7 @@
 <?php
 namespace Codeforges\SpotApiBundle\Document;
 
+use Codeforges\CFRest\ApiBundle\Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
@@ -125,7 +126,7 @@ class Marker
      * @param Codeforges\SpotApiBundle\Document\User $user
      * @return $this
      */
-    public function setUser(\Codeforges\SpotApiBundle\Document\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
         return $this;

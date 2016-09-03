@@ -3,9 +3,7 @@ Codeforges\SpotApiBundle\Document\Media:
     properties:
         id:
             expose: true
-        user:
-            expose: true
-        url:
+        fileName:
             expose: true
         description:
             expose: true
