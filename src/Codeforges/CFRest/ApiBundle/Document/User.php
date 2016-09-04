@@ -23,9 +23,14 @@ class User extends BaseUser
     protected $markers;
 
     /**
+     * @MongoDB\ReferenceMany(targetDocument="Codeforges\SpotApiBundle\Document\Media")
+     */
+    private $accounts = array();
+
+    /**
      * Add marker
      *
-     * @param Marker $marker
+     * @param Codeforges\SpotApiBundle\Document\Marker $marker
      */
     public function addMarker(\Codeforges\SpotApiBundle\Document\Marker $marker)
     {
@@ -50,5 +55,35 @@ class User extends BaseUser
     public function getMarkers()
     {
         return $this->markers;
+    }
+
+    /**
+     * Add account
+     *
+     * @param Codeforges\SpotApiBundle\Document\Media $account
+     */
+    public function addAccount(\Codeforges\SpotApiBundle\Document\Media $account)
+    {
+        $this->accounts[] = $account;
+    }
+
+    /**
+     * Remove account
+     *
+     * @param Codeforges\SpotApiBundle\Document\Media $account
+     */
+    public function removeAccount(\Codeforges\SpotApiBundle\Document\Media $account)
+    {
+        $this->accounts->removeElement($account);
+    }
+
+    /**
+     * Get accounts
+     *
+     * @return \Doctrine\Common\Collections\Collection $accounts
+     */
+    public function getAccounts()
+    {
+        return $this->accounts;
     }
 }

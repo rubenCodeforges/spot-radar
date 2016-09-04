@@ -1,6 +1,7 @@
 <?php
 namespace Codeforges\SpotApiBundle\Document;
 
+use Codeforges\CFRest\ApiBundle\Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
@@ -33,8 +34,16 @@ class Marker
      * @MongoDB\ReferenceOne(targetDocument="Codeforges\CFRest\ApiBundle\Document\User" , inversedBy="markers")
      */
     protected $user;
-    
 
+    /**
+     * @MongoDB\ReferenceMany(targetDocument="Codeforges\SpotApiBundle\Document\Media")
+     */
+    private $accounts = array();
+    public function __construct()
+    {
+        $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -110,16 +119,14 @@ class Marker
     {
         return $this->location;
     }
-    
-
 
     /**
      * Set user
      *
-     * @param Codeforges\CFRest\ApiBundle\Document\User $user
+     * @param Codeforges\SpotApiBundle\Document\User $user
      * @return $this
      */
-    public function setUser(\Codeforges\CFRest\ApiBundle\Document\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
         return $this;
@@ -128,10 +135,40 @@ class Marker
     /**
      * Get user
      *
-     * @return Codeforges\CFRest\ApiBundle\Document\User $user
+     * @return Codeforges\SpotApiBundle\Document\User $user
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add account
+     *
+     * @param Codeforges\SpotApiBundle\Document\Media $account
+     */
+    public function addAccount(\Codeforges\SpotApiBundle\Document\Media $account)
+    {
+        $this->accounts[] = $account;
+    }
+
+    /**
+     * Remove account
+     *
+     * @param Codeforges\SpotApiBundle\Document\Media $account
+     */
+    public function removeAccount(\Codeforges\SpotApiBundle\Document\Media $account)
+    {
+        $this->accounts->removeElement($account);
+    }
+
+    /**
+     * Get accounts
+     *
+     * @return \Doctrine\Common\Collections\Collection $accounts
+     */
+    public function getAccounts()
+    {
+        return $this->accounts;
     }
 }
