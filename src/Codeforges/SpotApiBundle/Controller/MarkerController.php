@@ -60,8 +60,12 @@ class MarkerController extends RestController implements ClassResourceInterface
     public function deleteAction($id)
     {
         $marker = $this->getBundleRepository('Marker')->find($id);
-        $dm = $this->get('doctrine_mongodb')->getManager();
 
+        if(!$marker){
+            $this->createNotFoundException('Marker not found');
+        }
+        
+        $dm = $this->get('doctrine_mongodb')->getManager();
         $dm->remove($marker);
         $dm->flush();
 

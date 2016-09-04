@@ -42,22 +42,16 @@ class MediaController extends RestController implements ClassResourceInterface
             ->getResponse();
     }
 
-    public function putAction($id, Request $request)
-    {
-        $media = $media = $this->getBundleRepository('Media')->find($id);
-        $form = $this->createForm(new MediaType(), $media);
-
-        return $this
-            ->getFormHandler()
-            ->processForm($form, $request)
-            ->getResponse();
-    }
 
     public function deleteAction($id)
     {
         $media = $this->getBundleRepository('Media')->find($id);
-        $dm = $this->get('doctrine_mongodb')->getManager();
 
+        if(!$media){
+            $this->createNotFoundException('Media not found');
+        }
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
         $dm->remove($media);
         $dm->flush();
 
