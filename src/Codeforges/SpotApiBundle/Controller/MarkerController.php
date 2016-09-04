@@ -68,7 +68,7 @@ class MarkerController extends RestController implements ClassResourceInterface
     }
 
       /**
-       * Create a User from the submitted data.<br/>
+       * Create a Marker from the submitted data.<br/>
        *
        * @ApiDoc(
        *   resource = true,
@@ -97,7 +97,7 @@ class MarkerController extends RestController implements ClassResourceInterface
     }
 
      /**
-      * Update a User from the submitted data by ID.<br/>
+      * Update a Marker from the submitted data by ID.<br/>
       *
       * @ApiDoc(
       *   resource = true,
