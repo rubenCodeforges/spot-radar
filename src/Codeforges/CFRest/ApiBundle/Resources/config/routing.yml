@@ -1,7 +1,3 @@
-spot_api_homepage:
-    path:     /api
-    defaults: { _controller: ApiBundle:Default:index }
-
 spot_api_user:
     resource: Codeforges\CFRest\ApiBundle\Controller\UserController
     type: rest
