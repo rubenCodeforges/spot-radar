@@ -7,12 +7,18 @@ use Codeforges\CFRest\ApiBundle\DependencyInjection\UserAuthCredentials;
 use Codeforges\CFRest\ApiBundle\Document\User;
 use Codeforges\CFRest\ApiBundle\Type\UserType;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Controller\Annotations\RouteResource;
+use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class UserController extends RestController
+/**
+ * @RouteResource("User", pluralize=false)
+ */
+class UserController extends RestController implements ClassResourceInterface
 {
 
     public function __construct()
@@ -20,13 +26,27 @@ class UserController extends RestController
         parent::__construct(ApiBundle::$BUNDLE_PATH);
     }
 
-
     /**
-     * register new user
+     * Create a User from the submitted data.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   section = "UserController",
+     *   description = "Creates a new user from the submitted data.",
+     *  parameters={
+     *      {"name"="username", "dataType"="string", "required"=true, "description"="username"},
+     *      {"name"="email", "dataType"="string", "required"=true, "description"="valid email"},
+     *      {"name"="plain_password", "dataType"="string", "required"=true, "plain password unencoded plain password"},
+     *  },
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function postUsersAction(Request $request){
+    public function postAction(Request $request){
 
         $form = $this->createForm(new UserType(), new User());
 
@@ -37,9 +57,21 @@ class UserController extends RestController
     }
 
     /**
+     * Return the overall user list.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   section = "UserController",
+     *   description = "Return the overall User List",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     *
      * @View(serializerGroups={"user"})
      */
-    public function getUserAllAction(): Response
+    public function getAllAction(): Response
     {
         $users = $this->getBundleRepository('User')->findAll();
 
@@ -48,9 +80,29 @@ class UserController extends RestController
     }
 
     /**
+     * Returns a auth token for the user, the user will be validated.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   section = "UserController",
+     *   description = "Returns a auth token for the user, the user will be validated",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the marker is not found"
+     *   },
+     *   requirements={
+     *      {
+     *          "name"="auth",
+     *          "dataType"="base64(json)",
+     *          "requirement"="strict",
+     *          "description"="A base64 encoded json object {'username': 'value', 'password': 'value' }"
+     *      }
+     *  },
+     * )
+     *
      * @QueryParam(name="auth")
      */
-    public function loginUserAction(ParamFetcher $paramFetcher) {
+    public function loginAction(ParamFetcher $paramFetcher) {
         $authService = $this->get('spot_api.auth_service');
 
         $params = $authService->getOAuthParams(

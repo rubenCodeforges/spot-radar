@@ -8,7 +8,7 @@ use Codeforges\SpotApiBundle\Type\MediaType;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
-
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 /**
  * @RouteResource("Media", pluralize=false)
  */
@@ -20,18 +20,65 @@ class MediaController extends RestController implements ClassResourceInterface
         parent::__construct(SpotApiBundle::$BUNDLE_PATH);
     }
 
+    /**
+     * Return the overall media list.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   section = "MediaController",
+     *   description = "Return the overall Media List",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the media is not found"
+     *   }
+     * )
+     *
+     */
     public function getAllAction()
     {
         $medias = $this->getBundleRepository('Media')->findAll();
         return $this->getView($medias);
     }
 
-    public function getAction($id)
+    /**
+     * Return an media identified by mediaId.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   section = "MediaController",
+     *   description = "Return an media identified by mediaId",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the media is not found"
+     *   }
+     * )
+     *
+     * @param string $mediaId
+     * @return View
+     */
+    public function getAction($mediaId)
     {
-        $media = $this->getBundleRepository('Media')->find($id);
+        $media = $this->getBundleRepository('Media')->find($mediaId);
         return $this->getView($media);
     }
 
+    /**
+     * Create a Media from the submitted data.<br/>
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   section = "MediaController",
+     *   description = "Creates a new media from the submitted data.",
+     *  parameters={
+     *      {"name"="file", "dataType"="base64(image)", "required"=true, "description"="image file base64 encoded"},
+     *      {"name"="name", "dataType"="string", "required"=true, "description"="File name"},
+     *  },
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     */
     public function postAction(Request $request)
     {
         $form = $this->createForm(new MediaType(), new Media());
@@ -42,22 +89,32 @@ class MediaController extends RestController implements ClassResourceInterface
             ->getResponse();
     }
 
-    public function putAction($id, Request $request)
+    /**
+     * Delete an media identified by mediaId.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   section = "MediaController",
+     *   description = "Delete an media identified by mediaId",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the media is not found"
+     *   }
+     * )
+     *
+     * @param string $mediaId
+     *
+     * @return View
+     */
+    public function deleteAction($mediaId)
     {
-        $media = $media = $this->getBundleRepository('Media')->find($id);
-        $form = $this->createForm(new MediaType(), $media);
+        $media = $this->getBundleRepository('Media')->find($mediaId);
 
-        return $this
-            ->getFormHandler()
-            ->processForm($form, $request)
-            ->getResponse();
-    }
+        if(!$media){
+            $this->createNotFoundException('Media not found');
+        }
 
-    public function deleteAction($id)
-    {
-        $media = $this->getBundleRepository('Media')->find($id);
         $dm = $this->get('doctrine_mongodb')->getManager();
-
         $dm->remove($media);
         $dm->flush();
 

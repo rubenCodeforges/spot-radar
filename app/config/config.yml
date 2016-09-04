@@ -147,3 +147,5 @@ jms_serializer:
             FOSUserBundle:
                 namespace_prefix: 'FOS\UserBundle'
                 path: '%kernel.root_dir%/Resources/serializer/FOSUserBundle'
+
+nelmio_api_doc: ~
