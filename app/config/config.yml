@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: '@ApiBundle/Resources/config/services.yml' }
+    - { resource: "@SpotApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -67,17 +69,47 @@ doctrine_mongodb:
        default:
           auto_mapping: true
           mappings:
-              SpotApiBundle:
+              ApiBundle:
                   type: annotation
                   dir: Document/
-                  prefix: 'Codeforges\SpotRadar\SpotApiBundle\'
+                  prefix: 'Codeforges\CFRest\ApiBundle\'
                   is_bundle: true
 
-              SpotAuthServerBundle:
+              AuthServerBundle:
                   type: annotation
                   dir: Document/
-                  prefix: 'Codeforges\SpotRadar\SpotAuthServerBundle\'
+                  prefix: 'Codeforges\CFRest\AuthServerBundle\'
                   is_bundle: true
+knp_gaufrette:
+    stream_wrapper: ~
+
+    adapters:
+        media_adapter:
+            local:
+                directory: '%kernel.root_dir%\..\web\media\'
+
+    filesystems:
+        media_fs:
+            adapter:    media_adapter
+
+vich_uploader:
+    db_driver: mongodb
+    storage: gaufrette
+
+    mappings:
+        media_file:
+          uri_prefix: /media
+          upload_destination: media_fs
+
+
+ivory_base64_file:
+    default: true
+
+spot_api:
+#    amazon_s3:
+#        aws_key: %amazon_aws_key%
+#        aws_secret_key: %amazon_aws_secret_key%
+#        base_url:       %amazon_s3_base_url%
 
 fos_rest:
     param_fetcher_listener: true
@@ -95,14 +127,14 @@ fos_rest:
 fos_user:
     db_driver: mongodb
     firewall_name: main
-    user_class: Codeforges\SpotRadar\SpotApiBundle\Document\User
+    user_class: Codeforges\CFRest\ApiBundle\Document\User
 
 fos_oauth_server:
     db_driver:           mongodb
-    client_class:        Codeforges\SpotRadar\SpotAuthServerBundle\Document\Client
-    access_token_class:  Codeforges\SpotRadar\SpotAuthServerBundle\Document\AccessToken
-    refresh_token_class: Codeforges\SpotRadar\SpotAuthServerBundle\Document\RefreshToken
-    auth_code_class:     Codeforges\SpotRadar\SpotAuthServerBundle\Document\AuthCode
+    client_class:        Codeforges\CFRest\AuthServerBundle\Document\Client
+    access_token_class:  Codeforges\CFRest\AuthServerBundle\Document\AccessToken
+    refresh_token_class: Codeforges\CFRest\AuthServerBundle\Document\RefreshToken
+    auth_code_class:     Codeforges\CFRest\AuthServerBundle\Document\AuthCode
     service:
         user_provider: fos_user.user_manager
 jms_serializer:
@@ -113,8 +145,7 @@ jms_serializer:
         auto_detection: true
         directories:
             FOSUserBundle:
-                namespace_prefix: FOS\UserBundle
-                path: '%kernel.root_dir%/config/serializer/FosUserBundle'
-            SpotApi:
-                namespace_prefix: Codeforges\SpotRaadar\SpotApiBundle
-                path: '%kernel.root_dir%\..\src\Codeforges\SpotRadar\SpotApiBundle\Resources\config\serializer'
+                namespace_prefix: 'FOS\UserBundle'
+                path: '%kernel.root_dir%/Resources/serializer/FOSUserBundle'
+
+nelmio_api_doc: ~

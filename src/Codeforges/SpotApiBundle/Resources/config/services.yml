@@ -1,0 +1,15 @@
+#parameters:
+#
+#  core.amazon_s3.class: AmazonS3
+#  core_storage.media_uploader.class: Codeforges\SpotApiBundle\Services\MediaUploader
+#
+#services:
+#
+#  loosemonkies_core.amazon_s3:
+#    class: %core.amazon_s3.class%
+#    arguments:
+#         - { key: %amazon_aws_key%, secret: %amazon_aws_secret_key% }
+#
+#  core_storage.photo_uploader:
+#    class: %core_storage.photo_uploader.class%
+#    arguments: [@photo_storage_filesystem]

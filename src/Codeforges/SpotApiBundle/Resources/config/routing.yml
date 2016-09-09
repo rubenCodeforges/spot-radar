@@ -1,0 +1,7 @@
+spot_api_marker:
+    resource: Codeforges\SpotApiBundle\Controller\MarkerController
+    type: rest
+
+spot_api_media:
+    resource: Codeforges\SpotApiBundle\Controller\MediaController
+    type: rest
