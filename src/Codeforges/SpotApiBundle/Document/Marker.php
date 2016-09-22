@@ -38,10 +38,11 @@ class Marker
     /**
      * @MongoDB\ReferenceMany(targetDocument="Codeforges\SpotApiBundle\Document\Media")
      */
-    private $accounts = array();
+    private $media = array();
+
     public function __construct()
     {
-        $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->media = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -145,30 +146,30 @@ class Marker
     /**
      * Add account
      *
-     * @param Codeforges\SpotApiBundle\Document\Media $account
+     * @param Codeforges\SpotApiBundle\Document\Media $media
      */
-    public function addAccount(\Codeforges\SpotApiBundle\Document\Media $account)
+    public function addMedia(\Codeforges\SpotApiBundle\Document\Media $media)
     {
-        $this->accounts[] = $account;
+        $this->media[] = $media;
     }
 
     /**
      * Remove account
      *
-     * @param Codeforges\SpotApiBundle\Document\Media $account
+     * @param Codeforges\SpotApiBundle\Document\Media $media
      */
-    public function removeAccount(\Codeforges\SpotApiBundle\Document\Media $account)
+    public function removeMedia(\Codeforges\SpotApiBundle\Document\Media $media)
     {
-        $this->accounts->removeElement($account);
+        $this->media->removeElement($media);
     }
 
     /**
      * Get accounts
      *
-     * @return \Doctrine\Common\Collections\Collection $accounts
+     * @return \Doctrine\Common\Collections\Collection $media
      */
-    public function getAccounts()
+    public function getMedia()
     {
-        return $this->accounts;
+        return $this->media;
     }
 }

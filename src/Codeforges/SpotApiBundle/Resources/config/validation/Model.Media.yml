@@ -1,4 +1,4 @@
-Codeforges\SpotApiBundle\Document\Marker:
+Codeforges\SpotApiBundle\Document\Media:
       properties:
             file:
                 - NotBlank: ~

@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Codeforges\SpotApiBundle\SpotApiBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Ivory\Base64FileBundle\IvoryBase64FileBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle()
         );
 
